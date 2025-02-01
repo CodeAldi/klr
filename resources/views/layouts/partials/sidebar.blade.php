@@ -57,20 +57,22 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
+        <!-- Home -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Home</div>
             </a>
         </li>
+        @if (Auth()->user()->hasRole('Peminjam'))
         {{-- ! user mahasiswa dan dosen ! --}}
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <span>mhs dan dosen</span>
             </a>
-        </li>
+        </li>    
+        @elseif(Auth()->user()->hasRole('Teknisi LabKom'))
         {{-- ! user teknisi labor ! --}}
         <li class="menu-item">
             <a href="#" class="menu-link">
@@ -78,12 +80,15 @@
                 <span>teknisi labor</span>
             </a>
         </li>
+        @elseif(Auth()->user()->hasRole('Kepala LabKom'))
         {{-- ! user kepala labor ! --}}
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <span>kepala labor</span>
             </a>
-        </li>
+        </li>    
+        @endif
+        
     </ul>
 </aside>
