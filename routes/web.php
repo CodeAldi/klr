@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LabKomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,9 @@ Route::controller(AuthenticationController::class)->group(function(){
     Route::post('/login/authenticate', 'authenticate')->middleware('guest')->name('authenticate');
     Route::post('/logout', 'logout')->middleware('auth')->name('logout');
     Route::get('/register','RegisterView')->middleware('guest')->name('register');
+});
+Route::controller(LabKomController::class)->middleware(['auth','role:admin'])->group(function(){
+    Route::get('/management-labor-komputer','index')->name('admin.labkom.index');
+    Route::post('/management-labor-komputer/store','store')->name('admin.labkom.store');
+    Route::patch('/management-labor-komputer/patch','update')->name('admin.labkom.update');
 });

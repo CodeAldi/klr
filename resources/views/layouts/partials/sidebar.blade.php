@@ -58,7 +58,7 @@
 
     <ul class="menu-inner py-1">
         <!-- Home -->
-        <li class="menu-item">
+        <li class="menu-item {{ (Request::RouteIs('home')) ? 'active' : '' }} ">
             <a href="{{ route('home') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Home</div>
@@ -86,6 +86,14 @@
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <span>kepala labor</span>
+            </a>
+        </li>    
+        @elseif(Auth()->user()->hasRole('admin'))
+        {{-- ! user admin ! --}}
+        <li class="menu-item {{ (Request::RouteIs('admin.labkom.*')) ? 'active' : '' }}">
+            <a href="{{ route('admin.labkom.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-buildings"></i>
+                <span>management labor komputer</span>
             </a>
         </li>    
         @endif
