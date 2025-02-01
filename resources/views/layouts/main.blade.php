@@ -51,7 +51,7 @@
     <script src="{{ asset('assets/js/config.js') }}"></script>
   </head>
 
-  <body>
+  <body onload="startTime()">
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -107,6 +107,24 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
+    <script>
+      function startTime() {
+          const today = new Date();
+          let h = today.getHours();
+          let m = today.getMinutes();
+          let s = today.getSeconds();
+          menit = checkTime(m);
+          detik = checkTime(s);
+          console.log(h,menit,detik);
+          
+          document.getElementById('jam').innerHTML = h + ":" + m + ":" + s;
+          setTimeout(startTime, 1000);
+          }
+          
+          function checkTime(i) {
+          if (i < 10) {i="0" + i}; // add zero in front of numbers < 10 return i;
+          }
+    </script>
     @stack('page-js')
   </body>
 </html>
