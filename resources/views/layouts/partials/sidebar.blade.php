@@ -102,6 +102,12 @@
                 <span>management User</span>
             </a>
         </li>    
+        <li class="menu-item {{ (Request::RouteIs('admin.assignmentUser.*')) ? 'active' : '' }}">
+            <a href="{{ route('admin.assignmentUser.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-task"></i>
+                <span>Assignment User</span>
+            </a>
+        </li>    
         @endif
         
     </ul>

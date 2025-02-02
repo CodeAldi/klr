@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignmentUserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LabKomController;
@@ -37,4 +38,9 @@ Route::controller(ManagementUserController::class)->middleware(['auth','role:adm
     Route::post('/manajement-user/store','store')->name('admin.manajemenUser.store');
     Route::patch('/manajement-user/patch','update')->name('admin.manajemenUser.update');
     Route::delete('/manajement-user/{user}/delete','destroy')->name('admin.manajemenUser.destroy');
+});
+Route::controller(AssignmentUserController::class)->middleware(['auth','role:admin'])->group(function(){
+    Route::get('/assignment-user','index')->name('admin.assignmentUser.index');
+    Route::post('/assignment-user/store','store')->name('admin.assignmentUser.store');
+    Route::delete('/assigment-user/{id}/delete','destroy')->name('admin.assignmentUser.destroy');
 });
