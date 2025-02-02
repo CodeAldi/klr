@@ -16,7 +16,7 @@
     <div class="container mt-2">
         <div class="card">
             <h5 class="card-header">Tabel Data Labor Komputer</h5>
-            <div class="table-responsive text-wrap card-body">
+            <div class="table-responsive text-nowrap">
                 <table class="table" id="dataLabor">
                     <thead>
                         <tr>
@@ -38,22 +38,26 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <button class="dropdown-item btn btn-primary mb-1" data-bs-toggle="modal"
+                                        {{-- <button class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#modalShow"><i class="bx bx-show-alt me-1"></i>
-                                            Lihat</button>
-                                        <button class="dropdown-item btn btn-warning text-white mb-1" data-bs-toggle="modal"
+                                            Lihat</button> --}}
+                                        <button class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#modalEdit" data-index="{{ $item }}" onclick="modalEdit(this)"><i class="bx bx-edit-alt me-1"></i>
                                             Edit</button>
-                                        <button class="dropdown-item btn btn-danger text-white mb-1"><i class="bx bx-trash me-1"></i>
-                                            Delete</button>
+                                            <form action="{{ route('admin.labkom.destroy',['laborkom'=>$item]) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="dropdown-item"><i class="bx bx-trash me-1"></i>
+                                                Delete</button>
+                                            </form>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         @empty
-                        <tr>
+                        {{-- <tr>
                             <td colspan="5" class="bg-warning text-white text-center">Data Masih Kosong!</td>
-                        </tr>
+                        </tr> --}}
                         @endforelse
                     </tbody>
                 </table>

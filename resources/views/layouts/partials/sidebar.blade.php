@@ -96,6 +96,12 @@
                 <span>management labor komputer</span>
             </a>
         </li>    
+        <li class="menu-item {{ (Request::RouteIs('admin.manajemenUser.*')) ? 'active' : '' }}">
+            <a href="{{ route('admin.manajemenUser.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <span>management User</span>
+            </a>
+        </li>    
         @endif
         
     </ul>

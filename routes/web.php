@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LabKomController;
+use App\Http\Controllers\ManagementUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,11 @@ Route::controller(LabKomController::class)->middleware(['auth','role:admin'])->g
     Route::get('/management-labor-komputer','index')->name('admin.labkom.index');
     Route::post('/management-labor-komputer/store','store')->name('admin.labkom.store');
     Route::patch('/management-labor-komputer/patch','update')->name('admin.labkom.update');
+    Route::delete('/management-labor-komputer/{laborkom}/delete','destroy')->name('admin.labkom.destroy');
+});
+Route::controller(ManagementUserController::class)->middleware(['auth','role:admin'])->group(function(){
+    Route::get('/management-user','index')->name('admin.manajemenUser.index');
+    Route::post('/manajement-user/store','store')->name('admin.manajemenUser.store');
+    Route::patch('/manajement-user/patch','update')->name('admin.manajemenUser.update');
+    Route::delete('/manajement-user/{user}/delete','destroy')->name('admin.manajemenUser.destroy');
 });

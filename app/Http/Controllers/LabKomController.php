@@ -42,4 +42,8 @@ class LabKomController extends Controller
         return back();
         
     }
+    function destroy(LaborKomputer $laborkom) {
+        $laborkom->delete();
+        return back();
+    }
 }
