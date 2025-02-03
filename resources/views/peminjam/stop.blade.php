@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body">
                 @if (count($catatan) > 0)
-                    <p>waktu mulai : {{ date('H:m:s', strtotime($catatan[0]->start)) }} WIB</p>
+                    <p>waktu mulai : {{ date('H:i:s', strtotime($catatan[0]->start)) }} WIB</p>
                     <form action="{{ route('peminjam.stop') }}" method="post">
                         @csrf
                         <input type="hidden" name="id" value="{{ $catatan[0]->id }}">
