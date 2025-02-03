@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssignmentUserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\LabKomController;
 use App\Http\Controllers\ManagementUserController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::controller(AuthenticationController::class)->group(function(){
     Route::post('/logout', 'logout')->middleware('auth')->name('logout');
     Route::get('/register','RegisterView')->middleware('guest')->name('register');
 });
+// !admin route start
 Route::controller(LabKomController::class)->middleware(['auth','role:admin'])->group(function(){
     Route::get('/management-labor-komputer','index')->name('admin.labkom.index');
     Route::post('/management-labor-komputer/store','store')->name('admin.labkom.store');
@@ -44,3 +46,12 @@ Route::controller(AssignmentUserController::class)->middleware(['auth','role:adm
     Route::post('/assignment-user/store','store')->name('admin.assignmentUser.store');
     Route::delete('/assigment-user/{id}/delete','destroy')->name('admin.assignmentUser.destroy');
 });
+// !admin route end
+// !teknisi route start
+Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
+    Route::get('/management-komputer','index')->name('teknisi.komputer.index');
+    Route::post('/mangement-komputer/store','store')->name('teknisi.komputer.store');
+    Route::patch('/mangement-komputer/patch', 'update')->name('teknisi.komputer.update');
+    Route::delete('/mangement-komputer/{komputer}/delete','destroy')->name('teknisi.komputer.destroy');
+});
+// !telnisi route end

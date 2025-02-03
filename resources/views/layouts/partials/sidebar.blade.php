@@ -74,10 +74,16 @@
         </li>    
         @elseif(Auth()->user()->hasRole('Teknisi LabKom'))
         {{-- ! user teknisi labor ! --}}
+        <li class="menu-item {{ (Request::RouteIs('teknisi.komputer.*')) ? 'active' : '' }}">
+            <a href="{{ route('teknisi.komputer.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-devices"></i>
+                <span>Management komputer</span>
+            </a>
+        </li>
         <li class="menu-item">
             <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <span>teknisi labor</span>
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <span>Laporan Pemakaian Komputer</span>
             </a>
         </li>
         @elseif(Auth()->user()->hasRole('Kepala LabKom'))
