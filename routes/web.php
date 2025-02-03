@@ -59,5 +59,9 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
 // !peminjam route start
 Route::controller(PemakaianController::class)->middleware(['auth','role:Peminjam'])->group(function(){
     Route::get('/pemakaian-komputer','index')->name('peminjam.pemakaian.index');
+    Route::post('/pemakaian-komputer/pilih-komputer','pilihLabor')->name('peminjam.pilihLabor');
+    Route::post('/pemakaian-komputer/mulai-pencatatan','mulaiPencatatan')->name('peminjam.mulai');
+    Route::get('/pemakaian-komputer/berhentikan-pencatatan','stopPencatatanView')->name('peminjam.viewStop');
+    Route::post('/pemakaian-komputer/berhentikan-pencatatan','stopPencatatan')->name('peminjam.stop');
 });
 // !peminjam route end

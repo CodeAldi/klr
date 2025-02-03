@@ -5,7 +5,7 @@
     <div class="card">
         <h5 class="card-header">Pilih Laboratorium Komputer</h5>
         <div class="card-body">
-            <form action="#" method="post">
+            <form action="{{ route('peminjam.pilihLabor') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-10"><select name="labor" id="labor" class="form-select">

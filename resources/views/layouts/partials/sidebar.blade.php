@@ -66,12 +66,21 @@
         </li>
         @if (Auth()->user()->hasRole('Peminjam'))
         {{-- ! user mahasiswa dan dosen ! --}}
-        <li class="menu-item {{ (Request::RouteIs('peminjam.*')) ? 'active' : '' }}">
-            <a href="{{ route('peminjam.pemakaian.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-pencil"></i>
-                <span>mulai pencatatan</span>
-            </a>
-        </li>    
+            @if (Request::RouteIs('peminjam.pilihLabor*'))
+                
+            <li class="menu-item {{ (Request::RouteIs('peminjam.pilihLabor')) ? 'active' : '' }}">
+                <a href="{{ route('peminjam.pemakaian.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-pencil"></i>
+                    <span>mulai pencatatan</span>
+                </a>
+            </li>    
+            @endif
+            <li class="menu-item {{ (Request::RouteIs('peminjam.viewStop*')) ? 'active' : '' }}">
+                <a href="{{ route('peminjam.viewStop') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-stop-circle"></i>
+                    <span>stop pencatatan</span>
+                </a>
+            </li>
         @elseif(Auth()->user()->hasRole('Teknisi LabKom'))
         {{-- ! user teknisi labor ! --}}
         <li class="menu-item {{ (Request::RouteIs('teknisi.komputer.*')) ? 'active' : '' }}">

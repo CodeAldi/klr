@@ -21,4 +21,13 @@ class LaborKomputer extends Model
     {
         return $this->hasMany(AssignmentUser::class);
     }
+    /**
+     * Get all of the komputer for the LaborKomputer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function komputer(): HasMany
+    {
+        return $this->hasMany(Komputer::class);
+    }
 }
