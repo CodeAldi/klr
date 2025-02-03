@@ -66,10 +66,10 @@
         </li>
         @if (Auth()->user()->hasRole('Peminjam'))
         {{-- ! user mahasiswa dan dosen ! --}}
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <span>mhs dan dosen</span>
+        <li class="menu-item {{ (Request::RouteIs('peminjam.*')) ? 'active' : '' }}">
+            <a href="{{ route('peminjam.pemakaian.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-pencil"></i>
+                <span>mulai pencatatan</span>
             </a>
         </li>    
         @elseif(Auth()->user()->hasRole('Teknisi LabKom'))

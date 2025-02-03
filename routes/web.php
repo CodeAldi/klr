@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\LabKomController;
 use App\Http\Controllers\ManagementUserController;
+use App\Http\Controllers\PemakaianController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,3 +56,8 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
     Route::delete('/mangement-komputer/{komputer}/delete','destroy')->name('teknisi.komputer.destroy');
 });
 // !telnisi route end
+// !peminjam route start
+Route::controller(PemakaianController::class)->middleware(['auth','role:Peminjam'])->group(function(){
+    Route::get('/pemakaian-komputer','index')->name('peminjam.pemakaian.index');
+});
+// !peminjam route end
