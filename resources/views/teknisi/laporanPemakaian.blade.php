@@ -21,8 +21,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td>{{ $item->komputer->nama }}</td>
-                            <td>{{ date('H:m:s', strtotime($item->start)) }} WIB</td>
-                            <td>{{ date('H:m:s', strtotime($item->end)) }} WIB</td>
+                            <td>{{ date('H:i:s', strtotime($item->start)) }} WIB</td>
+                            <td>{{ date('H:i:s', strtotime($item->end)) }} WIB</td>
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
