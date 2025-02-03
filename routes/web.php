@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\LabKomController;
+use App\Http\Controllers\LaporanPemakaianController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\PemakaianController;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Route::controller(AuthenticationController::class)->group(function(){
     Route::post('/login/authenticate', 'authenticate')->middleware('guest')->name('authenticate');
     Route::post('/logout', 'logout')->middleware('auth')->name('logout');
     Route::get('/register','RegisterView')->middleware('guest')->name('register');
+    Route::post('/register','register')->middleware('guest')->name('registeraction');
 });
 // !admin route start
 Route::controller(LabKomController::class)->middleware(['auth','role:admin'])->group(function(){
@@ -54,6 +56,9 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
     Route::post('/mangement-komputer/store','store')->name('teknisi.komputer.store');
     Route::patch('/mangement-komputer/patch', 'update')->name('teknisi.komputer.update');
     Route::delete('/mangement-komputer/{komputer}/delete','destroy')->name('teknisi.komputer.destroy');
+});
+Route::controller(LaporanPemakaianController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
+    Route::get('/laporan-pemakaian-komputer','index')->name('teknisi.laporan.index');
 });
 // !telnisi route end
 // !peminjam route start

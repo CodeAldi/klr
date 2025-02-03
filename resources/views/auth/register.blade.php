@@ -13,7 +13,7 @@
                 <h4 class="mb-2">Register here 🚀</h4>
                 <p class="mb-4">Make your app management easy and fun!</p>
 
-                <form id="formAuthentication" class="mb-3" action="#" method="POST">
+                <form id="formAuthentication" class="mb-3" action="{{ route('registeraction') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>

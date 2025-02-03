@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -40,5 +42,14 @@ class AuthenticationController extends Controller
     }
     function RegisterView() {
         return view('auth.register');
+    }
+    function register(Request $request) {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = UserRole::peminjam;
+        $user->save();
+        return redirect()->route('login');
     }
 }

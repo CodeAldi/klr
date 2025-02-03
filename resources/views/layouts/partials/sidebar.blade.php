@@ -89,8 +89,8 @@
                 <span>Management komputer</span>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="#" class="menu-link">
+        <li class="menu-item {{ (Request::RouteIs('teknisi.laporan.*')) ? 'active' : '' }}">
+            <a href="{{ route('teknisi.laporan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                 <span>Laporan Pemakaian Komputer</span>
             </a>
