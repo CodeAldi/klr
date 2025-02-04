@@ -2,7 +2,15 @@
 @section('content')
     <div class="container mt-2">
         <div class="card">
-            <h5 class="card-header">Tabel Data Komputer</h5>
+            <div class="card-header row">
+                <h5 class="card-title col-8 mt-3">
+                    Laporan Pemakaian Komputer
+                </h5>
+                <button type="button" class="btn btn-primary col-4 " data-bs-toggle="modal" data-bs-target="#modalCreate">
+                    <i class="tf-icons bx bx-spreadsheet"></i>
+                    Download
+                </button>
+            </div>
             <div class="table-responsive text-nowrap">
                 <table class="table" id="dataPemakaianLabor">
                     <thead>
