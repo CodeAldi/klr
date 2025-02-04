@@ -97,10 +97,10 @@
         </li>
         @elseif(Auth()->user()->hasRole('Kepala LabKom'))
         {{-- ! user kepala labor ! --}}
-        <li class="menu-item">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <span>kepala labor</span>
+        <li class="menu-item {{ (Request::RouteIs('kepala.laporan.*')) ? 'active' : '' }}">
+            <a href="{{ route('kepala.laporan.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <span>Laporan Pemakaian Komputer</span>
             </a>
         </li>    
         @elseif(Auth()->user()->hasRole('admin'))

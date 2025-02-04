@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadExcelController;
 use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\LabKomController;
+use App\Http\Controllers\LaporanKepalaLaborController;
 use App\Http\Controllers\LaporanPemakaianController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\PemakaianController;
@@ -61,8 +62,9 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
 Route::controller(LaporanPemakaianController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
     Route::get('/laporan-pemakaian-komputer','index')->name('teknisi.laporan.index');
 });
-Route::controller(DownloadExcelController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
-    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->name('teknisi.laporan.download');
+Route::controller(DownloadExcelController::class)->middleware(['auth'])->group(function(){
+    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Teknisi LabKom')->name('teknisi.laporan.download');
+    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Kepala LabKom')->name('kepala.laporan.download');
 });
 // !telnisi route end
 // !peminjam route start
@@ -74,3 +76,8 @@ Route::controller(PemakaianController::class)->middleware(['auth','role:Peminjam
     Route::post('/pemakaian-komputer/berhentikan-pencatatan','stopPencatatan')->name('peminjam.stop');
 });
 // !peminjam route end
+// !kepala labor start
+Route::controller(LaporanKepalaLaborController::class)->middleware(['auth', 'role:Kepala LabKom'])->group(function(){
+    Route::get('/laporan-pemakaian-komputer', 'laporanView')->name('kepala.laporan.index');
+});
+// !kepala labor end
