@@ -3,6 +3,7 @@
 use App\Http\Controllers\AssignmentUserController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DownloadExcelController;
 use App\Http\Controllers\KomputerController;
 use App\Http\Controllers\LabKomController;
 use App\Http\Controllers\LaporanPemakaianController;
@@ -59,6 +60,9 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
 });
 Route::controller(LaporanPemakaianController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
     Route::get('/laporan-pemakaian-komputer','index')->name('teknisi.laporan.index');
+});
+Route::controller(DownloadExcelController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
+    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->name('teknisi.laporan.download');
 });
 // !telnisi route end
 // !peminjam route start

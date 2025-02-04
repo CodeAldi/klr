@@ -6,10 +6,13 @@
                 <h5 class="card-title col-8 mt-3">
                     Laporan Pemakaian Komputer
                 </h5>
-                <button type="button" class="btn btn-primary col-4 " data-bs-toggle="modal" data-bs-target="#modalCreate">
-                    <i class="tf-icons bx bx-spreadsheet"></i>
-                    Download
-                </button>
+                <form action="{{ route('teknisi.laporan.download') }}" method="post" class="col-4">
+                    @csrf
+                    <button type="submit" class="btn btn-primary float-end">
+                        <i class="tf-icons bx bx-spreadsheet"></i>
+                        Download
+                    </button>
+                </form>
             </div>
             <div class="table-responsive text-nowrap">
                 <table class="table" id="dataPemakaianLabor">
