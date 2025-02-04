@@ -34,16 +34,10 @@
                             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
-                            <label class="form-check-label" for="terms-conditions">
-                                I agree to
-                                <a href="javascript:void(0);">privacy policy & terms</a>
-                            </label>
-                        </div>
-                    </div>
+                    <video id="video" autoplay class="form-control"></video>
+                    <canvas id="canvas" class="form-control my-3"></canvas>
+                    <img id="photo" hidden/>
+                    <button id="capture" type="button" class="btn btn-warning d-grid w-100 mb-2"><i class='bx bx-camera'></i> Ambil foto</button>
                     <button class="btn btn-primary d-grid w-100">Sign up</button>
                 </form>
 
@@ -59,3 +53,30 @@
     </div>
 </div>
 @endsection
+@push('in-body')
+    <script>
+        const video = document.getElementById('video');
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const photo = document.getElementById('photo');
+            const captureButton = document.getElementById('capture');
+    
+            // Akses kamera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log("Gagal mengakses kamera: ", error);
+                });
+    
+            // Ambil gambar dari video
+            captureButton.addEventListener('click', function () {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                photo.src = canvas.toDataURL('image/png'); // Menampilkan gambar hasil tangkapan
+
+            });
+    </script>
+@endpush
