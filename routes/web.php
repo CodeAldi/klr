@@ -60,11 +60,11 @@ Route::controller(KomputerController::class)->middleware(['auth', 'role:Teknisi 
     Route::delete('/mangement-komputer/{komputer}/delete','destroy')->name('teknisi.komputer.destroy');
 });
 Route::controller(LaporanPemakaianController::class)->middleware(['auth', 'role:Teknisi LabKom'])->group(function(){
-    Route::get('/laporan-pemakaian-komputer','index')->name('teknisi.laporan.index');
+    Route::get('/teknisi/laporan-pemakaian-komputer/index','index')->name('teknisi.laporan.index');
 });
 Route::controller(DownloadExcelController::class)->middleware(['auth'])->group(function(){
-    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Teknisi LabKom')->name('teknisi.laporan.download');
-    Route::post('/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Kepala LabKom')->name('kepala.laporan.download');
+    Route::post('/teknisi/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Teknisi LabKom')->name('teknisi.laporan.download');
+    Route::post('/kepala/laporan-pemakaian-komputer/download-excel', 'teknisiExcel')->middleware('role:Kepala LabKom')->name('kepala.laporan.download');
 });
 // !telnisi route end
 // !peminjam route start

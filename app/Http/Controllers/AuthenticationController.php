@@ -8,6 +8,7 @@ use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticationController extends Controller
 {
@@ -61,6 +62,16 @@ class AuthenticationController extends Controller
             $wajahName = $request->nomor_induk . '.' . $wajah->getClientOriginalExtension();
             $urlPhoto = $wajah->storeAs('public/uploads',$wajahName);
             $userDetail->url_photo = $urlPhoto;
+            
+            $base64 = "data:image/png;base64," . base64_encode(file_get_contents($request->file('wajah')->path()));
+            $response = Http::withHeaders(['Accesstoken' => env('BIZNET_TOKEN')])
+            ->post(env('BIZNET_ENDPOINT') . '/risetai/face-api/facegallery/enroll-face',[
+                'user_id' => (string) $user->id,
+                'user_name' => $user->name,
+                'facegallery_id' => env('BIZNET_FG'),
+                'trx_id' => env('BIZNET_TRX_ID'),
+                'image' => $base64,
+            ]);
         }else {
             $userDetail->url_photo = 'kosong';
         }

@@ -46,12 +46,11 @@
                     </div>
                     <div class="row mb-3">
                         <label for="video">Ambil foto wajah :</label>
-                        <video id="video" autoplay class="form-control"></video>
-
+                        <video id="video" autoplay></video>
                     </div>
                     <div class="row mb-3">
                         <label for="canvas">Preview:</label>
-                        <canvas id="canvas" class="form-control"></canvas>
+                        <canvas id="canvas"></canvas>
                     </div>
                     <input type="file" name="wajah" id="wajah" accept="image/*" hidden>
                     <button id="capture" type="button" class="btn btn-warning d-grid w-100 mb-2"><i class='bx bx-camera'></i> Ambil foto</button>
