@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\UserRole;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,5 +60,14 @@ class User extends Authenticatable
     public function assignment(): HasMany
     {
         return $this->hasMany(AssignmentUser::class);
+    }
+    /**
+     * Get the userDetail associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function userDetail(): HasOne
+    {
+        return $this->hasOne(UserDetail::class);
     }
 }

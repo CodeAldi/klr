@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserRole;
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -50,6 +51,20 @@ class AuthenticationController extends Controller
         $user->password = bcrypt($request->password);
         $user->role = UserRole::peminjam;
         $user->save();
+
+        $userDetail = new UserDetail();
+        $userDetail->user_id = $user->id;
+        $userDetail->nomor_induk = $request->nomor_induk;
+        $userDetail->contact = $request->cp;
+        if ($request->hasFile('wajah')) {
+            $wajah = $request->file('wajah');
+            $wajahName = $request->nomor_induk . '.' . $wajah->getClientOriginalExtension();
+            $urlPhoto = $wajah->storeAs('public/uploads',$wajahName);
+            $userDetail->url_photo = $urlPhoto;
+        }else {
+            $userDetail->url_photo = 'kosong';
+        }
+        $userDetail->save();
         return redirect()->route('login');
     }
 }
