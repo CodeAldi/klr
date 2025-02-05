@@ -6,6 +6,7 @@ use App\Models\Komputer;
 use App\Models\LaborKomputer;
 use App\Models\Pemakaian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PemakaianController extends Controller
 {
@@ -26,14 +27,31 @@ class PemakaianController extends Controller
         
     }
     function mulaiPencatatan(Request $request) {
-        $komputer = Komputer::find($request->komputer);
-        $pemakaian = new Pemakaian();
-        $pemakaian->user_id = Auth()->user()->id;
-        $pemakaian->labor_komputer_id = $komputer->labor->id;
-        $pemakaian->komputer_id = $komputer->id;
-        $pemakaian->start = now();
-        $pemakaian->save();
-        return redirect()->route('peminjam.viewStop');
+
+        // start Face recognation
+        $base64 = "data:image/png;base64," . base64_encode(file_get_contents($request->file('wajah')->path()));
+        $respone = Http::withHeaders(['Accesstoken' => env('BIZNET_TOKEN')])
+        ->post(env('BIZNET_ENDPOINT') . '/risetai/face-api/facegallery/identify-face',[
+            "facegallery_id" => env('BIZNET_FG'),
+            "image" => $base64 ,
+            "trx_id" => env('BIZNET_TRX_ID'),
+        ]);
+        // end face recognation
+        if (($respone->json('risetai')['status']) == 200) {
+            $komputer = Komputer::find($request->komputer);
+            $pemakaian = new Pemakaian();
+            $pemakaian->user_id = Auth()->user()->id;
+            $pemakaian->labor_komputer_id = $komputer->labor->id;
+            $pemakaian->komputer_id = $komputer->id;
+            $pemakaian->start = now();
+            $pemakaian->save();
+            return redirect()->route('peminjam.viewStop');
+            # code...
+        }
+        else {
+            return redirect()->route('home');
+            
+        }
     }
     function stopPencatatanView() {
         $catatan = Pemakaian::where('user_id',Auth()->user()->id)->whereNull('end')->get();
