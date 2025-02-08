@@ -29,8 +29,6 @@ class PemakaianController extends Controller
     function mulaiPencatatan(Request $request) {
 
         $base64 = "data:image/png;base64," . base64_encode(file_get_contents($request->file('wajah')->path()));
-        // cek apakah wajah sesuai dengan user id
-
         // start Face recognation
         $respone = Http::withHeaders(['Accesstoken' => env('BIZNET_TOKEN')])
         ->post(env('BIZNET_ENDPOINT') . '/risetai/face-api/facegallery/identify-face',[
@@ -38,18 +36,20 @@ class PemakaianController extends Controller
             "image" => $base64 ,
             "trx_id" => env('BIZNET_TRX_ID'),
         ]);
-        dd($respone->json(['risetai']['return']['user_id']),Auth()->user()->id);
         // end face recognation
         if (($respone->json('risetai')['status']) == 200) {
-            $komputer = Komputer::find($request->komputer);
-            $pemakaian = new Pemakaian();
-            $pemakaian->user_id = Auth()->user()->id;
-            $pemakaian->labor_komputer_id = $komputer->labor->id;
-            $pemakaian->komputer_id = $komputer->id;
-            $pemakaian->start = now();
-            $pemakaian->save();
-            return redirect()->route('peminjam.viewStop');
-            # code...
+            // cek apakah user yang login sesuai dengan wajah yang terdaftar
+            if ($respone->json('riteai')['status'][0]['user_id'] == Auth()->user()->id) {
+                $komputer = Komputer::find($request->komputer);
+                $pemakaian = new Pemakaian();
+                $pemakaian->user_id = Auth()->user()->id;
+                $pemakaian->labor_komputer_id = $komputer->labor->id;
+                $pemakaian->komputer_id = $komputer->id;
+                $pemakaian->start = now();
+                $pemakaian->save();
+                return redirect()->route('peminjam.viewStop');
+            }
+            return redirect()->route('home');
         }
         else {
             return redirect()->route('home');
