@@ -28,14 +28,17 @@ class PemakaianController extends Controller
     }
     function mulaiPencatatan(Request $request) {
 
-        // start Face recognation
         $base64 = "data:image/png;base64," . base64_encode(file_get_contents($request->file('wajah')->path()));
+        // cek apakah wajah sesuai dengan user id
+
+        // start Face recognation
         $respone = Http::withHeaders(['Accesstoken' => env('BIZNET_TOKEN')])
         ->post(env('BIZNET_ENDPOINT') . '/risetai/face-api/facegallery/identify-face',[
             "facegallery_id" => env('BIZNET_FG'),
             "image" => $base64 ,
             "trx_id" => env('BIZNET_TRX_ID'),
         ]);
+        dd($respone->json(['risetai']));
         // end face recognation
         if (($respone->json('risetai')['status']) == 200) {
             $komputer = Komputer::find($request->komputer);
