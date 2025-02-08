@@ -38,7 +38,7 @@ class PemakaianController extends Controller
             "image" => $base64 ,
             "trx_id" => env('BIZNET_TRX_ID'),
         ]);
-        dd($respone->json(['risetai']));
+        dd($respone->json(['risetai']['return']['user_id']),Auth()->user()->id);
         // end face recognation
         if (($respone->json('risetai')['status']) == 200) {
             $komputer = Komputer::find($request->komputer);
