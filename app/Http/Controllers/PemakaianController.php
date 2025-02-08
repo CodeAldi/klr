@@ -39,7 +39,7 @@ class PemakaianController extends Controller
         // end face recognation
         if (($respone->json('risetai')['status']) == 200) {
             // cek apakah user yang login sesuai dengan wajah yang terdaftar
-            if ($respone->json('riteai')['status'][0]['user_id'] == Auth()->user()->id) {
+            if ($respone->json('riteai')['return'][0]['user_id'] == Auth()->user()->id) {
                 $komputer = Komputer::find($request->komputer);
                 $pemakaian = new Pemakaian();
                 $pemakaian->user_id = Auth()->user()->id;
