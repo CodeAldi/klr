@@ -86,7 +86,7 @@
         <li class="menu-item {{ (Request::RouteIs('teknisi.komputer.*')) ? 'active' : '' }}">
             <a href="{{ route('teknisi.komputer.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
-                <span>Management komputer</span>
+                <span>Manajemen komputer</span>
             </a>
         </li>
         <li class="menu-item {{ (Request::RouteIs('teknisi.laporan.*')) ? 'active' : '' }}">
@@ -108,19 +108,19 @@
         <li class="menu-item {{ (Request::RouteIs('admin.labkom.*')) ? 'active' : '' }}">
             <a href="{{ route('admin.labkom.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-buildings"></i>
-                <span>management labor komputer</span>
+                <span>manajemen labor komputer</span>
             </a>
         </li>    
         <li class="menu-item {{ (Request::RouteIs('admin.manajemenUser.*')) ? 'active' : '' }}">
             <a href="{{ route('admin.manajemenUser.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <span>management User</span>
+                <span>manajemen User</span>
             </a>
         </li>    
         <li class="menu-item {{ (Request::RouteIs('admin.assignmentUser.*')) ? 'active' : '' }}">
             <a href="{{ route('admin.assignmentUser.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-task"></i>
-                <span>Assignment User</span>
+                <span>penugasan User</span>
             </a>
         </li>    
         @endif
