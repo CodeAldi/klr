@@ -25,12 +25,12 @@
                         foto</button>
                     </div>
                     <div class="row mb-3">
-                        <label for="video1">Ambil foto wajah :</label>
-                        <video id="video1" autoplay class="form-control"></video>
+                        <label for="video1" class="col-6">Ambil foto wajah :</label>
+                        <label for="canvas1" class="col-6">Preview:</label>
                     </div>
-                    <div class="row mb-3">
-                        <label for="canvas1">Preview:</label>
-                        <canvas id="canvas1" class="form-control"></canvas>
+                    <div class="row mb-3 gx-2">
+                        <video id="video1" autoplay class="rounded w-50 col-4"></video>
+                        <canvas id="canvas1" class="rounded w-50 col-4"></canvas>
                     </div>
                     <input type="file" name="wajah" id="wajah" accept="image/*" hidden>
                     
