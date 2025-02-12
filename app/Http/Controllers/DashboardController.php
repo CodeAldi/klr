@@ -17,6 +17,8 @@ class DashboardController extends Controller
                 return view('welcome')->with('title','pilih labor')->with('labor',$labor);
             }
             
+        } elseif (Auth()->user()->hasRole('admin')){
+            return redirect()->route('admin.labkom.index');
         }
         return view('welcome')->with('title','Home');
     }

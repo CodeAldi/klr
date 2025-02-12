@@ -57,13 +57,6 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Home -->
-        <li class="menu-item {{ (Request::RouteIs('home')) ? 'active' : '' }} ">
-            <a href="{{ route('home') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Home</div>
-            </a>
-        </li>
         @if (Auth()->user()->hasRole('Peminjam'))
         {{-- ! user mahasiswa dan dosen ! --}}
             @if (Request::RouteIs('peminjam.pilihLabor*'))
@@ -83,6 +76,13 @@
             </li>
         @elseif(Auth()->user()->hasRole('Teknisi LabKom'))
         {{-- ! user teknisi labor ! --}}
+        <!-- Home -->
+        <li class="menu-item {{ (Request::RouteIs('home')) ? 'active' : '' }} ">
+            <a href="{{ route('home') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Home</div>
+            </a>
+        </li>
         <li class="menu-item {{ (Request::RouteIs('teknisi.komputer.*')) ? 'active' : '' }}">
             <a href="{{ route('teknisi.komputer.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-devices"></i>
@@ -97,6 +97,13 @@
         </li>
         @elseif(Auth()->user()->hasRole('Kepala LabKom'))
         {{-- ! user kepala labor ! --}}
+        <!-- Home -->
+        <li class="menu-item {{ (Request::RouteIs('home')) ? 'active' : '' }} ">
+            <a href="{{ route('home') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Home</div>
+            </a>
+        </li>
         <li class="menu-item {{ (Request::RouteIs('kepala.laporan.*')) ? 'active' : '' }}">
             <a href="{{ route('kepala.laporan.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
